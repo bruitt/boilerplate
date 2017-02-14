@@ -1,0 +1,55 @@
+default: &default
+  browserslist:
+    - "> 1%"
+    - "IE 11"
+
+  entries:
+    index: "./src/entries/Landing"
+
+  globals:
+    devServerPort: 4000
+    srcScriptsDir: "./src"
+    buildScriptsDir: "./public"
+
+  proxy:
+    /api:
+      target: "https://test-api.bruitt.com"
+      changeOrigin: true
+      pathRewrite:
+        "^/api" : ""
+
+  images: false
+  # images:
+  #   optipng:
+  #     optimizationLevel: 7
+  #   gifsicle:
+  #     interlaced: false
+  #   pngquant:
+  #     quality: "65-90"
+  #     speed: 4
+  #   mozjpeg:
+  #     quality: 77
+
+  styles:
+    cssMangling: false
+    localIdentName: "ns-[name]-[local]"
+
+  htmls:
+    template: "./src/templates/index.html"
+
+  transpilePackages:
+    - "@bruitt/app-entry"
+    - "preact-compat"
+
+development:
+  <<: *default
+
+production: &production
+  <<: *default
+
+  alias:
+    "react": "preact-compat"
+    "react-dom": "preact-compat"
+
+staging:
+  <<: *production

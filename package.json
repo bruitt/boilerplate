@@ -1,0 +1,64 @@
+{
+  "name": "@bruitt/boilerplate",
+  "version": "1.0.0",
+  "repository": "git@github.com:bruitt/boilerplate.git",
+  "author": "Pavel Pertsev <morhetz@gmail.com>",
+  "license": "MIT",
+  "scripts": {
+    "gen": "node ./bin/gen",
+    "clean": "rm -rf public",
+    "copy-assets": "mkdir -p public && cp -R src/assets public",
+    "lint": "eslint ./src",
+    "lint-fix": "eslint --fix ./src",
+    "build-stats": "webpack --config config/webpack.js --json | webpack-bundle-size-analyzer",
+    "build-target": "webpack --config config/webpack.js --env.nocolors",
+    "prebuild-target": "npm run clean",
+    "postbuild-target": "npm run copy-assets",
+    "build-dev": "TARGET=development npm run build-target",
+    "build-prod": "TARGET=production npm run build-target",
+    "build-test": "TARGET=staging npm run build-target",
+    "build": "npm run build-target",
+    "preinstall": "node ./bin/nestedInstall.js",
+    "postinstall": "ln -sfn ../src ./node_modules/app",
+    "watch": "TARGET=development webpack-dev-server --config config/webpack.js --hot --no-info --progress --host 0.0.0.0 --env.devServer",
+    "precommit": "lint-staged",
+    "postcheckout": "track-changed checkout",
+    "postmerge": "track-changed merge",
+    "postrewrite": "track-changed rewrite"
+  },
+  "dependencies": {
+    "@bruitt/app-entry": "^4.0.3",
+    "@bruitt/reducer": "^1.0.1",
+    "@bruitt/webpack-builder": "^4.0.3",
+    "axios": "^0.15.2",
+    "date-fns": "^1.20.1",
+    "history": "^4.3.0",
+    "ramda": "^0.22.1",
+    "react-addons-css-transition-group": "^15.4.1",
+    "react-responsive": "^1.1.5",
+    "redux-thunk": "^2.2.0",
+    "require-yaml": "^0.0.1",
+    "url-pattern": "^1.0.3"
+  },
+  "devDependencies": {
+    "@bruitt/eslint-config-lint-app": "^2.0.0",
+    "@bruitt/eslint-config-lint-base": "^2.1.1",
+    "husky": "^0.13.1",
+    "track-changed": "^1.0.2",
+    "webpack-bundle-size-analyzer": "^2.5.0"
+  },
+  "babel": {
+    "presets": [
+      "@bruitt/webpack-builder/babel"
+    ]
+  },
+  "track-changed": {
+    "yarn.lock": "yarn"
+  },
+  "lint-staged": {
+    "*.js": [
+      "eslint --fix",
+      "git add"
+    ]
+  }
+}

@@ -1,0 +1,8 @@
+{
+  "parser": "babel-eslint",
+  "extends": "@bruitt/eslint-config-lint-app",
+  "env": {
+    "browser": true,
+    "node": true
+  }
+}
