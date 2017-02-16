@@ -27,9 +27,9 @@
     "postrewrite": "track-changed rewrite"
   },
   "dependencies": {
-    "@bruitt/app-entry": "^4.0.7",
+    "@bruitt/app-entry": "^4.0.8",
     "@bruitt/reducer": "^1.0.1",
-    "@bruitt/webpack-builder": "^4.0.7",
+    "@bruitt/webpack-builder": "^4.0.8",
     "axios": "^0.15.2",
     "date-fns": "^1.20.1",
     "history": "^4.3.0",
