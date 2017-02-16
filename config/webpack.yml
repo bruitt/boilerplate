@@ -1,7 +1,8 @@
 default: &default
-  browserslist:
-    - "> 1%"
-    - "IE 11"
+  # browserslist:
+  ### defaults to:
+  #   - "> 1%"
+  #   - "IE 11"
 
   entries:
     index: "./src/entries/Landing"
@@ -11,14 +12,23 @@ default: &default
     srcScriptsDir: "./src"
     buildScriptsDir: "./public"
 
-  proxy:
-    /api:
-      target: "https://test-api.bruitt.com"
-      changeOrigin: true
-      pathRewrite:
-        "^/api" : ""
+  # proxy:
+  #   /api:
+  #     target: "https://test-api.bruitt.com"
+  #     changeOrigin: true
+  #     pathRewrite:
+  #       "^/api" : ""
 
-  images: false
+  # prerender: true (defaults to false)
+  ### `true` value defaults to:
+  # prerender:
+  #   routes:
+  #     - "/"
+  #   options:
+  #     ...
+
+  # images: true (defaults to false)
+  ### `true` value defaults to:
   # images:
   #   optipng:
   #     optimizationLevel: 7
@@ -31,15 +41,26 @@ default: &default
   #     quality: 77
 
   styles:
-    cssMangling: false
+    # extractCss: true (defaults to true @ prod build)
+    # cssMangling: false (defaults to false)
     localIdentName: "ns-[name]-[local]"
 
   htmls:
     template: "./src/templates/index.html"
 
-  transpilePackages:
-    - "@bruitt/app-entry"
-    - "preact-compat"
+  # htmls:
+  #   - template: "./src/templates/index.html"
+  #     filename: "index.html"
+  #     chunks:
+  #       - index
+  #   - template: "./src/templates/about.html"
+  #     filename: "about.html"
+  #     chunks:
+  #       - about
+
+  # transpilePackages:
+  #   - "untranspiledPackageA"
+  #   - "untranspiledPackageB"
 
 development:
   <<: *default
